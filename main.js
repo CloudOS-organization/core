@@ -17,7 +17,7 @@ export default class Main extends Component {
     constructor() {
         super();
         this.fetchApps();
-        this.socket = io('http://localhost:3001');
+        this.socket = io('https://socket.cloudos.batchcloud.de');
         this.socket.on("connect", () => {
             console.log("Socket connect || Uid: ", this.socket.id);
         });
