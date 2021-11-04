@@ -26,6 +26,14 @@ export default class Window extends Component {
         super();
         this.storage = new Storage(this);
         this.cache = new Cache(this);
+        this.socket = io('https://socket.cloudos.batchcloud.de');
+        this.socket.on("connect", () => {
+            console.log("Socket connect || Uid: ", this.socket.id);
+        });
+
+        this. socket.on("disconnect", () => {
+            console.log("Socket disconnect || Uid: ",this.socket.id);
+        });
     }
     firstUpdated() {
         super.firstUpdated();
