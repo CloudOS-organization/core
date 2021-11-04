@@ -6,7 +6,8 @@ export default class Main extends Component {
     static properties = {
         host: Type.string(window.location.origin),
         apps: Type.array(),
-        sheets: Type.array()
+        sheets: Type.array(),
+        socket: Type.object({})
     };
     static use = [Desk, Taskbar];
     static ref = {
@@ -16,6 +17,14 @@ export default class Main extends Component {
     constructor() {
         super();
         this.fetchApps();
+        this.socket = io('https://socket.cloudos.batchcloud.de');
+        this.socket.on("connect", () => {
+            console.log("Socket connect || Uid: ", this.socket.id);
+        });
+
+        this. socket.on("disconnect", () => {
+            console.log("Socket disconnect || Uid: ",this.socket.id);
+        });
     }
     render() {
         return html`
